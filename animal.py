@@ -26,6 +26,8 @@ class Animal:
 
 class Env:
     def __init__(self, max_x, max_y, initial_animal=50):
+        self.max_x = max_x
+        self.max_y = max_y
         self.board = [["🌳" for x in range(max_x)] for y in range(max_y)]
         self.board_dict = defaultdict(list)
         for _ in range(initial_animal):
@@ -41,11 +43,16 @@ class Env:
             print()
 
     def next_step(self):
-        pass
+        for (coord, ani_lst) in self.board_dict.items():
+            for ani in ani_lst:
+                ani.move(self.max_x, self.max_y)
+                x, y = ani.coord
+                self.board[x][y] = ani.emoji
 
 
 e = Env(max_x, max_y)
 while 1:
     e.print()
+    e.next_step()
     sleep(0.5)
     print()
