@@ -43,11 +43,12 @@ class Env:
             print()
 
     def next_step(self):
-        for (coord, ani_lst) in self.board_dict.items():
-            for ani in ani_lst:
-                ani.move(self.max_x, self.max_y)
-                x, y = ani.coord
-                self.board[x][y] = ani.emoji
+        for board_dict_key in self.board_dict:
+            for i in range(len(self.board_dict[board_dict_key])):
+                self.board_dict[board_dict_key][i].move(self.max_x, self.max_y)
+                x, y = self.board_dict[board_dict_key][i].coord
+                emoji = self.board_dict[board_dict_key][i].emoji
+                self.board[x][y] = emoji
 
 
 e = Env(max_x, max_y)
