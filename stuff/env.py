@@ -6,7 +6,7 @@ class Env:
     def __init__(self, initial_animal=50):
         self.max_x = max_x
         self.max_y = max_y
-        self.board = [["🌳" for x in range(max_x)] for y in range(max_y)]
+        self.board = [[" " for x in range(max_x)] for y in range(max_y)]
         self.board_dict = defaultdict(list)
 
     def print(self):
