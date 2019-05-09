@@ -25,6 +25,6 @@ class Display:
                     f"num of cell in {i} row is {len(row)}, max width {self.width}"
                 )
             for j, cell in enumerate(row):
-                self.scr.addstr(i, j, cell)
+                self.scr.addstr(i + self.begin_x, j + self.begin_y, cell)
         self.scr.refresh()
         curses.endwin()
