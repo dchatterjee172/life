@@ -9,9 +9,10 @@ class Display:
         self.begin_y = begin_y
         self.height = height
         self.scr = curses.initscr()
-        self.win = curses.newwin(height, width, begin_y, begin_x)
+        self.scr.clear()
+        self.scr.refresh()
         curses.curs_set(0)
-        pass
+        curses.endwin()
 
     def show(self, board):
         if len(board) > self.height:
@@ -25,3 +26,5 @@ class Display:
                 )
             for j, cell in enumerate(row):
                 self.scr.addstr(i, j, cell)
+        self.scr.refresh()
+        curses.endwin()
