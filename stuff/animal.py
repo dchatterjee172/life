@@ -31,5 +31,5 @@ class Tiger(Animal):
 
 class Rabbit(Animal):
     def __init__(self, x, y):
-        life_force = np.random.normal(loc=50, scale=2)
+        life_force = np.random.normal(loc=10, scale=2)
         Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐇", eats=[Grass])
