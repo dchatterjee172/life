@@ -10,7 +10,6 @@ class Display:
         self.width = width
         self.begin_x = begin_x
         self.begin_y = begin_y
-        self.height = height
         self.win = curses.newwin(height, width, begin_y, begin_x)
 
     def show(self, board):
