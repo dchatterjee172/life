@@ -11,20 +11,20 @@ class Env:
         self.max_x = max_x
         self.max_y = max_y
         self.time = -1
-        self._board = [[" " for x in range(max_x)] for y in range(max_y)]
-        self.board_dict = defaultdict(list)
         self.board_size = max_x * max_y
         self.all_stuff = all_stuff
+        self.all_objects = []
         self._populate(cum_weights)
 
     @property
     def board(self):
-        for (x, y), obj_list in self.board_dict.items():
-            try:
-                print(x, y)
-                self._board[x][y] = max(obj_list, key=lambda x: x.life_force).emoji
-            except ValueError:
-                self._board = " "
+        life_force = defaultdict(lambda: -1000000)
+        self._board = [["🍂" for x in range(max_x)] for y in range(max_y)]
+        for x, y, obj in self.all_objects:
+            if life_force[x, y] < obj.life_force:
+                self._board[x][y] = obj.emoji
+                life_force[x, y] = obj.life_force
+
         return self._board
 
     def _populate(self, cum_weights):
@@ -34,7 +34,12 @@ class Env:
             choices(self.all_stuff, cum_weights=cum_weights, k=self.board_size),
         ):
             obj = cls(x=x, y=y)
-            self.board_dict[x, y].append(obj)
+            self.all_objects.append([x, y, obj])
 
     def next_step(self):
         self.time += 1
+        for i, (_, _, obj) in enumerate(self.all_objects):
+            if hasattr(obj, "move"):
+                obj.move()
+                x, y = obj.coord
+                self.all_objects[i] = [x, y, obj]
