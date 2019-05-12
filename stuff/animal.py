@@ -1,12 +1,14 @@
 import numpy as np
 from stuff.conf import max_x, max_y
+from stuff.vegetation import Grass
 
 
 class Animal:
-    def __init__(self, emoji):
+    def __init__(self, emoji, eats):
         self.x = np.random.randint(0, max_x)
         self.y = np.random.randint(0, max_y)
         self.emoji = emoji
+        self.eats = eats
 
     @property
     def coord(self):
@@ -21,9 +23,9 @@ class Animal:
 
 class Tiger(Animal):
     def __init__(self):
-        Animal.__init__(self, emoji="🐅")
+        Animal.__init__(self, emoji="🐅", eats=[Rabbit])
 
 
 class Rabbit(Animal):
     def __init__(self):
-        Animal.__init__(self, emoji="🐇")
+        Animal.__init__(self, emoji="🐇", eats=[Grass])
