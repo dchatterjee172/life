@@ -8,9 +8,19 @@ class Env:
         self.max_x = max_x
         self.max_y = max_y
         self.time = -1
-        self.board = [[" " for x in range(max_x)] for y in range(max_y)]
+        self._board = [[" " for x in range(max_x)] for y in range(max_y)]
         self.board_dict = {(x, y): [] for x in range(max_x) for y in range(max_y)}
         self.board_size = max_x * max_y
+
+    @property
+    def board(self):
+        for (x, y), obj_list in self.board_dict.items():
+            try:
+                print(x, y)
+                self._board[x][y] = max(obj_list, key=lambda x: x.life_force).emoji
+            except ValueError:
+                self._board = " "
+        return self._board
 
     def populate(self, all_stuff, cum_weights):
         if len(all_stuff) != len(cum_weights):
@@ -22,13 +32,6 @@ class Env:
         ):
             obj = cls(x=x, y=y)
             self.board_dict[x, y].append(obj)
-            self.board[x][y] = obj.emoji
-
-    def print(self):
-        for row in self.board:
-            for cell in row:
-                print(cell, end="")
-            print()
 
     def next_step(self):
         if self.time < 0:
