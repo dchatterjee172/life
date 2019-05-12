@@ -24,12 +24,24 @@ class Animal:
 
 
 class Tiger(Animal):
+    count = 0
+
     def __init__(self, x, y):
         life_force = np.random.normal(loc=50, scale=2)
         Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐅", eats=[Rabbit])
+        Tiger.count += 1
+
+    def __del__(self):
+        Tiger.count -= 1
 
 
 class Rabbit(Animal):
+    count = 0
+
     def __init__(self, x, y):
         life_force = np.random.normal(loc=10, scale=2)
         Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐇", eats=[Grass])
+        Rabbit.count += 1
+
+    def __del__(self):
+        Rabbit.count -= 1
