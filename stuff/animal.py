@@ -4,9 +4,10 @@ from stuff.vegetation import Grass
 
 
 class Animal:
-    def __init__(self, emoji, eats):
-        self.x = np.random.randint(0, max_x)
-        self.y = np.random.randint(0, max_y)
+    def __init__(self, x, y, life_force, emoji, eats):
+        self.x = x
+        self.y = y
+        self.life_force = life_force
         self.emoji = emoji
         self.eats = eats
 
@@ -19,13 +20,16 @@ class Animal:
         delta_y = round(np.random.uniform(-1, 1))
         self.x = (self.x + delta_x) % max_x
         self.y = (self.y + delta_y) % max_y
+        self.life_force -= self.life_force * 0.01
 
 
 class Tiger(Animal):
-    def __init__(self):
-        Animal.__init__(self, emoji="🐅", eats=[Rabbit])
+    def __init__(self, x, y):
+        life_force = np.random.normal(loc=50, scale=2)
+        Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐅", eats=[Rabbit])
 
 
 class Rabbit(Animal):
-    def __init__(self):
-        Animal.__init__(self, emoji="🐇", eats=[Grass])
+    def __init__(self, x, y):
+        life_force = np.random.normal(loc=50, scale=2)
+        Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐇", eats=[Grass])

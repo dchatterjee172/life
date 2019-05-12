@@ -1,11 +1,7 @@
-import numpy as np
-from stuff.conf import max_x, max_y
-
-
 class Vegetation:
-    def __init__(self, emoji):
-        self.x = np.random.randint(0, max_x)
-        self.y = np.random.randint(0, max_y)
+    def __init__(self, x, y, emoji):
+        self.x = x
+        self.y = y
         self.emoji = emoji
 
     @property
@@ -14,5 +10,5 @@ class Vegetation:
 
 
 class Grass(Vegetation):
-    def __init__(self):
-        Vegetation.__init__(self, emoji="🌱")
+    def __init__(self, x, y):
+        Vegetation.__init__(self, x, y, emoji="🌱")
