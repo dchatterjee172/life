@@ -11,3 +11,8 @@ class Vegetation:
     @property
     def coord(self):
         return self.x, self.y
+
+
+class Grass(Vegetation):
+    def __init__(self):
+        Vegetation.__init__(self, emoji="🌱")
