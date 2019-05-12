@@ -3,12 +3,10 @@ from stuff.conf import max_x, max_y
 
 
 class Animal:
-    def __init__(self, emoji, eats_green, eats_meat):
+    def __init__(self, emoji):
         self.x = np.random.randint(0, max_x)
         self.y = np.random.randint(0, max_y)
         self.emoji = emoji
-        self.eats_green = eats_green
-        self.eats_meat = eats_meat
 
     @property
     def coord(self):
@@ -19,3 +17,13 @@ class Animal:
         delta_y = round(np.random.uniform(-1, 1))
         self.x = (self.x + delta_x) % max_x
         self.y = (self.y + delta_y) % max_y
+
+
+class Tiger(Animal):
+    def __init__(self):
+        Animal.__init__(self, emoji="🐅")
+
+
+class Rabbit(Animal):
+    def __init__(self):
+        Animal.__init__(self, emoji="🐇")
