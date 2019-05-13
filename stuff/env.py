@@ -34,7 +34,7 @@ class Env:
             choices(self.all_stuff, cum_weights=cum_weights, k=self.board_size),
         ):
             obj = cls(x=x, y=y)
-            self.all_objects.append([x, y, obj])
+            self.all_objects.append((x, y, obj))
 
     def next_step(self):
         self.time += 1
@@ -45,7 +45,7 @@ class Env:
                 if obj.life_force <= 0.1:
                     dead.append(i)
                     continue
-                self.all_objects[i] = [*obj.coord, obj]
+                self.all_objects[i] = (*obj.coord, obj)
         dead.sort(reverse=True)
         for d in dead:
             del self.all_objects[d]
