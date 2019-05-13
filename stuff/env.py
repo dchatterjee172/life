@@ -38,8 +38,15 @@ class Env:
 
     def next_step(self):
         self.time += 1
+        dead = []
         for i, (_, _, obj) in enumerate(self.all_objects):
             if hasattr(obj, "move"):
                 obj.move()
+                if obj.life_force <= 0.1:
+                    dead.append(i)
+                    continue
                 x, y = obj.coord
                 self.all_objects[i] = [x, y, obj]
+        dead.sort()
+        for i, d in enumerate(dead):
+            del self.all_objects[d - i]
