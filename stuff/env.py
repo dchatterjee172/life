@@ -45,8 +45,7 @@ class Env:
                 if obj.life_force <= 0.1:
                     dead.append(i)
                     continue
-                x, y = obj.coord
-                self.all_objects[i] = [x, y, obj]
+                self.all_objects[i] = [*obj.coord, obj]
         dead.sort()
         for i, d in enumerate(dead):
             del self.all_objects[d - i]

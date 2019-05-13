@@ -22,6 +22,12 @@ class Animal:
         self.y = (self.y + delta_y) % max_y
         self.life_force -= self.life_force * 0.1
 
+    def eat(self, life_force):
+        self.life_force += life_force
+
+    def eaten(self, life_force):
+        self.life_force = 0
+
 
 class Tiger(Animal):
     count = 0
