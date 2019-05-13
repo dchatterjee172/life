@@ -1,6 +1,6 @@
 from stuff.conf import max_x, max_y
-from itertools import product
-from random import choices
+from itertools import product, filterfalse
+from random import choices, randrange
 from collections import defaultdict
 
 
@@ -38,7 +38,16 @@ class Env:
 
     def next_step(self):
         self.time += 1
-        for i, (x, y, obj) in enumerate(self.all_objects):
+        board_dict = defaultdict(lambda: defaultdict(list))
+        for i, (_, _, obj) in enumerate(self.all_objects):
             obj.move()
+            board_dict[obj.coord][type(obj).__name__].append(obj)
             self.all_objects[i] = (*obj.coord, obj)
+        for _, obj_dict in board_dict.items():
+            for k, v in obj_dict.items():
+                for x in filterfalse(lambda x: not hasattr(x, "eat"), v):
+                    if x.eats in obj_dict.keys() and len(obj_dict[x.eats]):
+                        pray = obj_dict[x.eats].pop(randrange(len(obj_dict[x.eats])))
+                        x.eat(pray.life_force)
+                        pray.eaten()
         self.all_objects[:] = [t for t in self.all_objects if t[-1].life_force >= 0.1]

@@ -12,6 +12,9 @@ class Vegetation:
     def move(self):
         self.life_force = 0.9 * self.life_force
 
+    def eaten(self):
+        self.life_force = 0
+
 
 class Grass(Vegetation):
     count = 0

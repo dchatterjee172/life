@@ -25,7 +25,7 @@ class Animal:
     def eat(self, life_force):
         self.life_force += life_force
 
-    def eaten(self, life_force):
+    def eaten(self):
         self.life_force = 0
 
 
@@ -34,7 +34,9 @@ class Tiger(Animal):
 
     def __init__(self, x, y):
         life_force = np.random.normal(loc=50, scale=2)
-        Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐅", eats=[Rabbit])
+        Animal.__init__(
+            self, x=x, y=y, life_force=life_force, emoji="🐅", eats=Rabbit.__name__
+        )
         Tiger.count += 1
 
     def __del__(self):
@@ -46,7 +48,9 @@ class Rabbit(Animal):
 
     def __init__(self, x, y):
         life_force = np.random.normal(loc=10, scale=2)
-        Animal.__init__(self, x=x, y=y, life_force=life_force, emoji="🐇", eats=[Grass])
+        Animal.__init__(
+            self, x=x, y=y, life_force=life_force, emoji="🐇", eats=Grass.__name__
+        )
         Rabbit.count += 1
 
     def __del__(self):
