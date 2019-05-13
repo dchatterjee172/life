@@ -2,7 +2,7 @@ class Vegetation:
     def __init__(self, x, y, emoji):
         self.x = x
         self.y = y
-        self.life_force = 1
+        self.life_force = 0.2
         self.emoji = emoji
 
     @property

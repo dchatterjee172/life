@@ -46,6 +46,6 @@ class Env:
                     dead.append(i)
                     continue
                 self.all_objects[i] = [*obj.coord, obj]
-        dead.sort()
-        for i, d in enumerate(dead):
-            del self.all_objects[d - i]
+        dead.sort(reverse=True)
+        for d in dead:
+            del self.all_objects[d]

@@ -11,7 +11,7 @@ try:
     while True:
         dis.show(env.board)
         env.next_step()
-        curses.napms(700)
+        curses.napms(500)
 except KeyboardInterrupt:
     curses.endwin()
     sys.exit(0)
