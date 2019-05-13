@@ -38,13 +38,7 @@ class Env:
 
     def next_step(self):
         self.time += 1
-        dead = []
-        for i, (_, _, obj) in enumerate(self.all_objects):
+        for i, (x, y, obj) in enumerate(self.all_objects):
             obj.move()
-            if obj.life_force <= 0.1:
-                dead.append(i)
-                continue
             self.all_objects[i] = (*obj.coord, obj)
-        dead.sort(reverse=True)
-        for d in dead:
-            del self.all_objects[d]
+        self.all_objects[:] = [t for t in self.all_objects if t[-1].life_force >= 0.1]
