@@ -20,7 +20,7 @@ class Animal:
         delta_y = round(np.random.uniform(-1, 1))
         self.x = (self.x + delta_x) % max_x
         self.y = (self.y + delta_y) % max_y
-        self.life_force -= self.life_force * 0.5
+        self.life_force -= self.life_force * 0.1
 
 
 class Tiger(Animal):

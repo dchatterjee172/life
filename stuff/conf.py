@@ -1,2 +1,2 @@
-max_x = 10
-max_y = 10
+max_x = 25
+max_y = 25
