@@ -40,12 +40,11 @@ class Env:
         self.time += 1
         dead = []
         for i, (_, _, obj) in enumerate(self.all_objects):
-            if hasattr(obj, "move"):
-                obj.move()
-                if obj.life_force <= 0.1:
-                    dead.append(i)
-                    continue
-                self.all_objects[i] = (*obj.coord, obj)
+            obj.move()
+            if obj.life_force <= 0.1:
+                dead.append(i)
+                continue
+            self.all_objects[i] = (*obj.coord, obj)
         dead.sort(reverse=True)
         for d in dead:
             del self.all_objects[d]

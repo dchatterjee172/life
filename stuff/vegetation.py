@@ -2,12 +2,15 @@ class Vegetation:
     def __init__(self, x, y, emoji):
         self.x = x
         self.y = y
-        self.life_force = 0.2
+        self.life_force = 10
         self.emoji = emoji
 
     @property
     def coord(self):
         return self.x, self.y
+
+    def move(self):
+        self.life_force = 0.9 * self.life_force
 
 
 class Grass(Vegetation):
