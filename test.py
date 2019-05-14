@@ -20,6 +20,8 @@ def run_env(queue, env):
 def run_display(queue, dis):
     while True:
         all_objects = queue.get()
+        if not len(all_objects):
+            break
         life_force = defaultdict(lambda: -1000000)
         _board = [["🍂" for x in range(max_x)] for y in range(max_y)]
         for x, y, obj in all_objects:
@@ -28,15 +30,20 @@ def run_display(queue, dis):
                 life_force[x, y] = obj.life_force
         dis.show(_board)
         curses.napms(500)
+    queue.close()
+    curses.endwin()
 
 
 try:
-    mp.set_start_method("spawn")
-    queue = mp.Queue()
+    queue = mp.Queue(10)
     env_p = mp.Process(target=run_env, args=(queue, env))
     dis_p = mp.Process(target=run_display, args=(queue, dis))
     env_p.start()
     dis_p.start()
+    dis_p.join()
+    env_p.terminate()
 except KeyboardInterrupt:
+    env_p.terminate()
+    dis_p.terminate()
     curses.endwin()
     sys.exit(0)
