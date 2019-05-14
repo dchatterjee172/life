@@ -27,9 +27,9 @@ def run_display(queue, dis):
                 _board[x][y] = obj.emoji
                 life_force[x, y] = obj.life_force
         dis.show(_board)
+        curses.napms(500)
         if not len(all_objects):
             break
-        curses.napms(500)
     queue.close()
     curses.endwin()
 
