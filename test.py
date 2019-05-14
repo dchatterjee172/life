@@ -20,8 +20,6 @@ def run_env(queue, env):
 def run_display(queue, dis):
     while True:
         all_objects = queue.get()
-        if not len(all_objects):
-            break
         life_force = defaultdict(lambda: -1000000)
         _board = [["🍂" for x in range(max_x)] for y in range(max_y)]
         for x, y, obj in all_objects:
@@ -29,6 +27,8 @@ def run_display(queue, dis):
                 _board[x][y] = obj.emoji
                 life_force[x, y] = obj.life_force
         dis.show(_board)
+        if not len(all_objects):
+            break
         curses.napms(500)
     queue.close()
     curses.endwin()
