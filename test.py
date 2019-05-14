@@ -3,6 +3,7 @@ from stuff import Env, Grass, Tiger, Rabbit, max_x, max_y
 from display import Display
 import curses
 import sys
+import multiprocessing as mp
 
 all_stuff = (Grass, Tiger, Rabbit)
 env = Env(all_stuff=all_stuff, cum_weights=(0.8, 0.9, 1))
