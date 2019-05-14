@@ -16,17 +16,6 @@ class Env:
         self.all_objects = []
         self._populate(cum_weights)
 
-    @property
-    def board(self):
-        life_force = defaultdict(lambda: -1000000)
-        self._board = [["🍂" for x in range(max_x)] for y in range(max_y)]
-        for x, y, obj in self.all_objects:
-            if life_force[x, y] < obj.life_force:
-                self._board[x][y] = obj.emoji
-                life_force[x, y] = obj.life_force
-
-        return self._board
-
     def _populate(self, cum_weights):
         self.time += 1
         for (x, y), cls in zip(
